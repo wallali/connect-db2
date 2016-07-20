@@ -6,7 +6,8 @@
   "license": "MIT",
   "main": "./index.js",
   "repository": {
-    "type": "git"
+    "type": "git",
+    "url": "git://github.com/wallali/connect-db2"
   },
   "dependencies": {
     "debug": "^2.2.0",
