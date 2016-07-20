@@ -7,7 +7,7 @@ module.exports = {
     password: process.env.DB_PASS !== undefined ? process.env.DB_PASS : 'password',
     database: process.env.DB_NAME !== undefined ? process.env.DB_NAME : 'BLUDB',
     allowDrop: true,
-    dsn: '',
+    dsn: process.env.DB_DSN !== undefined ? process.env.DB_DSN : '',
     schema: {
         tableName: 'test_sessions'
     }

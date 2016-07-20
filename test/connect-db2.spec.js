@@ -10,18 +10,16 @@ var Db2Store = require('..')(session);
 
 describe('Db2Store constructor', function () {
     it('copies user options over defaults', function () {
-        var config = {
-            host: 'myhost',
-            schema: {
-                tableName: 'sometable'
-            }
+        config.host = 'myhost';
+        config.schema = {
+            tableName: 'sometable'
         };
         var store = new Db2Store(config);
 
         assert(store.options);
         assert.strictEqual(store.options.schema.tableName, 'sometable');
         assert.strictEqual(store.options.host, 'myhost');
-        assert(!store.options.allowDrop);
+        assert(store.options.allowDrop);
     });
 });
 
