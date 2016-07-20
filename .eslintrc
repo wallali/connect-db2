@@ -1,0 +1,12 @@
+---
+  env: 
+    node: true
+    mocha: true
+  extends: "eslint:recommended"
+  rules: 
+    semi: 2
+    quotes: 
+      - 2
+      - "single"
+    no-console: 0
+    no-extra-boolean-cast: 0

@@ -1,0 +1,29 @@
+{
+  "name": "connect-db2",
+  "description": "IBM DB2 session store for Connect",
+  "version": "0.0.1",
+  "author": "Ali Lokhandwala <ali@huestones.co.uk>",
+  "license": "MIT",
+  "main": "./index.js",
+  "repository": {
+    "type": "git"
+  },
+  "dependencies": {
+    "debug": "^2.2.0",
+    "extend": "^3.0.0",
+    "ibm_db": "^1.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^3.1.1",
+    "express-session": "^1.14.0",
+    "mocha": "^2.5.3"
+  },
+  "engines": {
+    "node": ">=1.2.0"
+  },
+  "scripts": {
+    "pretest": "npm install",
+    "test": "node_modules/.bin/mocha",
+    "lint": "node_modules/.bin/eslint index.js test lib"
+  }
+}

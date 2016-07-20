@@ -1,0 +1,14 @@
+{
+  "language": {
+    "javascript": {
+      "linting.prefer": [
+                "JSHint"
+            ],
+      "linting.usePreferredOnly": true
+    }
+  },
+  "linting.JSLint.collapsed": true,
+  "linting.enabled": true,
+  "useTabChar": false,
+  "spaceUnits": 4
+}
