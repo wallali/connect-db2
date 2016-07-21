@@ -1,7 +1,7 @@
 {
   "name": "connect-db2",
   "description": "IBM DB2 session store for Connect",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "author": "Ali Lokhandwala <ali@huestones.co.uk>",
   "license": "MIT",
   "main": "./index.js",
