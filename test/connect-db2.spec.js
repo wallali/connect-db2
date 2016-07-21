@@ -9,17 +9,10 @@ var Db2Store = require('..')(session);
 
 
 describe('Db2Store constructor', function () {
-    it('copies user options over defaults', function () {
-        config.host = 'myhost';
-        config.schema = {
-            tableName: 'sometable'
-        };
-        var store = new Db2Store(config);
-
-        assert(store.options);
-        assert.strictEqual(store.options.schema.tableName, 'sometable');
-        assert.strictEqual(store.options.host, 'myhost');
-        assert(store.options.allowDrop);
+    it('Throws when called as a function', function () {
+        assert.throws(function () {
+            Db2Store(config);
+        }, /Cannot call Db2Store constructor as a function/);
     });
 });
 
@@ -29,7 +22,7 @@ describe('Session interface', function () {
 
     before(function (done) {
         sessionStore.createDatabaseTable(function (err) {
-            if (err) throw err;
+            //if (err) throw err;
             done();
         });
     });
@@ -39,7 +32,7 @@ describe('Session interface', function () {
             if (err) throw err;
             sessionStore.close(function (err) {
                 if (err) throw err;
-                assert(!sessionStore.client.connected);
+                assert(!sessionStore._client.connected);
                 done();
             });
         });

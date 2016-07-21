@@ -22,7 +22,7 @@ var Db2Store = require('connect-db2')(session);
 var options = {
 	host: 'localhost',
 	port: 50000,
-	user: 'db2user',
+	username: 'db2user',
 	password: 'password',
 	database: 'BLUDB'
 };
@@ -85,7 +85,7 @@ Here is a list of all available options together with their default values:
 var options = {
 	host: 'localhost',         // Host name for database connection.
 	port: 50000,               // Port number for database connection.
-	user: 'db2user',           // Database user.
+	username: 'db2user',       // Database user.
 	password: 'password',      // Password for the above database user.
 	database: 'BLUDB',         // Database name.
 	expiration: 2592000,       // The maximum age of a valid session; milliseconds.
@@ -138,7 +138,7 @@ Now, you'll need to set up a local test database or create a free dashDB instanc
 {
 	host: 'localhost',
 	port: 50000,
-	user: 'db2user',
+	username: 'db2user',
 	password: 'password',
 	database: 'BLUDB'
 };
@@ -180,6 +180,7 @@ See Also
 --------
 * [IBM dashDB Reference](https://www.ibm.com/support/knowledgecenter/SS6NHC/com.ibm.swg.im.dashdb.doc/learn_how/database_reference.html)
 * [IBM developer Q&A](https://developer.ibm.com/answers/topics/dashdb/)
+* [DB2 Q&A on Stackoverflow](http://stackoverflow.com/questions/tagged/db2)
 
 License
 -------
