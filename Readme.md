@@ -6,6 +6,8 @@ An [IBM DB2](http://www.ibm.com/analytics/us/en/technology/db2/) session store f
 * The key idea behind this project is to allow using [IBM dashDB](https://console.ng.bluemix.net/catalog/services/dashdb/) for session storage for Node.js express apps deployed to [IBM Bluemix](https://console.ng.bluemix.net/).
 * Database access is provided through the [node-ibm_db](https://www.npmjs.com/package/ibm_db) package (so their [issues](https://github.com/ibmdb/node-ibm_db/issues) may affect us).
 
+[![NPM](https://nodei.co/npm/connect-db2.png)](https://npmjs.org/package/connect-db2)
+
 Setup
 -----
 
@@ -35,7 +37,7 @@ app.use(session({
 ```
 
 ### Using a DSN
-Altenatively if you prefer, you can use the full DSN string in the config instead:
+Altenatively if you prefer, you can supply the full DSN string in the config instead:
 
 ```js
 var session = require('express-session');
@@ -51,6 +53,8 @@ app.use(session({
     secret: 'keyboard cat'
 }));
 ```
+
+Note: When a DSN is available in the store config it will always be preferred over individual connection settings.
 
 ### Using an existing connection
 ```js
@@ -69,12 +73,38 @@ app.use(session({
 }));
 ```
 
+Creating the session table
+--------------------------
+
+You can ask the store to create the session table for you:
+
+```js
+sessionStore.createDatabaseTable(function(error){
+    
+});
+```
+
+This will ofcourse fail if the table already exists. 
+To create the table only when it does not exist, use:
+
+```js
+sessionStore.hasDatabaseTable(function(error, result){
+    if(!error && !result) {
+        sessionStore.createDatabaseTable(function(error){
+
+        });
+    }
+});
+```
+
 Closing the session store
 -------------------------
 
 To cleanly close the session store:
 ```js
-sessionStore.close();
+sessionStore.close(function(error){
+    
+});
 ```
 
 Options
@@ -132,7 +162,7 @@ npm install
 
 ### Step 3: Set Up the Test Database
 
-Now, you'll need to set up a local test database or create a free dashDB instance on [IBM Bluemix](https://console.ng.bluemix.net/catalog/services/dashdb/):
+Now, you'll need to set up a local test database or [create a free dashDB instance](https://console.ng.bluemix.net/catalog/services/dashdb/) on IBM Bluemix:
 
 ```js
 {
@@ -140,7 +170,8 @@ Now, you'll need to set up a local test database or create a free dashDB instanc
 	port: 50000,
 	username: 'db2user',
 	password: 'password',
-	database: 'BLUDB'
+	database: 'BLUDB',
+    dsn: ''
 };
 ```
 *The test database settings are located in [test/config.js](https://github.com/wallali/connect-db2/blob/master/test/config.js)*
@@ -156,7 +187,7 @@ DB_NAME="BLUDB"
 
 or a DSN via environment variables:
 ```
-DB_DSN="DATABASE=BLUDB;HOSTNAME=loclhost;PORT=50000;PROTOCOL=TCPIP;UID=db2user;PWD=password;"
+DB_DSN="DATABASE=BLUDB;HOSTNAME=localhost;PORT=50000;PROTOCOL=TCPIP;UID=db2user;PWD=password;"
 ```
 
 ### Running Tests
