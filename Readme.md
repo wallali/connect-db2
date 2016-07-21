@@ -98,6 +98,19 @@ var options = {
 };
 ```
 
+Contributing
+------------
+
+This is still a very young project and there are a number of ways you can contribute:
+
+* **Improve or correct the documentation** - All the documentation is in this readme file. If you see a mistake, or think something should be clarified or expanded upon, please [submit a pull request](https://github.com/wallali/connect-db2/pulls/new)
+* **Add test cases** - There is need for several more test cases and unit-tests to cover uncovered areas of code. It is a great way to get started with this project.
+* **Report a bug** - Please review [existing issues](https://github.com/wallali/connect-db2/issues) before submitting a new one; to avoid duplicates. If you can't find an issue that relates to the bug you've found, please [create a new one](https://github.com/wallali/connect-db2/issues).
+* **Fix a bug** - Have a look at the [existing issues](https://github.com/wallali/connect-db2/issues) for the project. If there's a bug in there that you'd like to tackle, please feel free to do so. Please submit a test case with that covers your code. After you've done all that, you can [submit a pull request](https://github.com/wallali/connect-db2/pulls/new) with your changes.
+* **Request a feature** - Again, please review the [existing issues](https://github.com/wallali/connect-db2/issues) before posting a feature request. If you can't find an existing one that covers your feature idea, please [create a new one](https://github.com/wallali/connect-db2/issues). This project is maintained in my free time, chances are you will need to implement your feature idea yourself or wait till I get the chance to do it.
+
+Before you contribute code, please read through at least some of the source code for the project. I would appreciate it if any pull requests for source code changes follow the coding style of the rest of the project. Use ```npm run lint``` to lint your code before submission.
+
 Configure Local Dev Environment
 ---------------------------
 ### Step 1: Get the Code
