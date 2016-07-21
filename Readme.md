@@ -3,6 +3,9 @@ connect-db2
 
 An [IBM DB2](http://www.ibm.com/analytics/us/en/technology/db2/) session store for [express.js](http://expressjs.com/).
 
+* The key idea behind this project is to allow using [IBM dashDB](https://console.ng.bluemix.net/catalog/services/dashdb/) for session storage for Node.js express apps deployed to [IBM Bluemix](https://console.ng.bluemix.net/).
+* Database access is provided through the [node-ibm_db](https://www.npmjs.com/package/ibm_db) package (so their [issues](https://github.com/ibmdb/node-ibm_db/issues) may affect us).
+
 Setup
 -----
 
@@ -77,15 +80,15 @@ sessionStore.close();
 Options
 -------
 
-Here is a list of all available options:
+Here is a list of all available options together with their default values:
 ```js
 var options = {
-	host: 'localhost',// Host name for database connection.
-	port: 50000,// Port number for database connection.
-	user: 'db2user',// Database user.
-	password: 'password',// Password for the above database user.
-	database: 'BLUDB',// Database name.
-	expiration: 2592000,// The maximum age of a valid session; milliseconds.
+	host: 'localhost',         // Host name for database connection.
+	port: 50000,               // Port number for database connection.
+	user: 'db2user',           // Database user.
+	password: 'password',      // Password for the above database user.
+	database: 'BLUDB',         // Database name.
+	expiration: 2592000,       // The maximum age of a valid session; milliseconds.
 	schema: {
 		tableName: 'sessions',
 		columnNames: {
@@ -94,7 +97,7 @@ var options = {
 			data: 'data'
 		}
 	},
-    allowDrop: false // If true, allows dropping the session table by calling sessionStore.dropDatabaseTable(), default: false
+    allowDrop: false            // When true, allows dropping the session table by calling sessionStore.dropDatabaseTable()
 };
 ```
 
@@ -171,6 +174,12 @@ Debugging
 DEBUG=connect:db2 node your-app.js
 ```
 This will output debugging messages from `connect-db2`.
+
+
+See Also
+--------
+* [IBM dashDB Reference](https://www.ibm.com/support/knowledgecenter/SS6NHC/com.ibm.swg.im.dashdb.doc/learn_how/database_reference.html)
+* [IBM developer Q&A](https://developer.ibm.com/answers/topics/dashdb/)
 
 License
 -------
