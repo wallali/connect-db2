@@ -1,7 +1,7 @@
 connect-db2
 ===========
 
-A DB2 session store for [express.js](http://expressjs.com/).
+An [IBM DB2](http://www.ibm.com/analytics/us/en/technology/db2/) session store for [express.js](http://expressjs.com/).
 
 Setup
 -----
@@ -162,4 +162,4 @@ This will output debugging messages from `connect-db2`.
 License
 -------
 
-MIT
+[MIT](https://github.com/wallali/connect-db2/blob/master/LICENSE)
