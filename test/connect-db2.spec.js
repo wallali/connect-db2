@@ -36,6 +36,14 @@ describe('Session interface', function () {
         });
     });
 
+    it('has database table', function (done) {
+        sessionStore.hasDatabaseTable(function (err, result) {
+            assert(!err);
+            assert(result);
+            done();
+        });
+    });
+
     it('sets session', function (done) {
         sessionStore.set(session.session_id, session.data, function (err) {
             assert(!err);
