@@ -1,16 +1,17 @@
-connect-db2
+connect-db2 
 ===========
+![Downloads](https://img.shields.io/npm/dm/connect-db2.svg)
 
 An [IBM DB2](http://www.ibm.com/analytics/us/en/technology/db2/) session store for [express.js](http://expressjs.com/).
 
 * The key idea behind this project is to allow using [IBM dashDB](https://console.ng.bluemix.net/catalog/services/dashdb/) for session storage for Node.js express apps deployed to [IBM Bluemix](https://console.ng.bluemix.net/).
 * Database access is provided through the [node-ibm_db](https://www.npmjs.com/package/ibm_db) package (so their [issues](https://github.com/ibmdb/node-ibm_db/issues) may affect us).
 
-[![NPM](https://nodei.co/npm/connect-db2.png)](https://npmjs.org/package/connect-db2)
-
 Setup
 -----
+[![NPM](https://nodei.co/npm/connect-db2.png)](https://npmjs.org/package/connect-db2)
 
+Install via npm:
 ```sh
 npm install connect-db2 express-session --save
 ```
@@ -80,7 +81,10 @@ You can ask the store to create the session table for you:
 
 ```js
 sessionStore.createDatabaseTable(function(error){
-    
+    if(error){
+        // deal with it 
+        return;
+    }
 });
 ```
 
@@ -88,8 +92,12 @@ This will ofcourse fail if the table already exists.
 To create the table only when it does not exist, use:
 
 ```js
-sessionStore.hasDatabaseTable(function(error, result){
-    if(!error && !result) {
+sessionStore.hasDatabaseTable(function(error, hasTable){
+    if(error){
+        // deal with it 
+        return;
+    }
+    if(hasTable === false) {
         sessionStore.createDatabaseTable(function(error){
 
         });
@@ -103,7 +111,10 @@ Closing the session store
 To cleanly close the session store:
 ```js
 sessionStore.close(function(error){
-    
+    if(error){
+        // deal with it 
+        return;
+    }
 });
 ```
 
@@ -134,6 +145,8 @@ var options = {
 Contributing
 ------------
 
+[![GitHub issues](https://img.shields.io/github/issues/wallali/connect-db2.svg)](https://github.com/wallali/connect-db2/issues)
+
 This is still a very young project and there are a number of ways you can contribute:
 
 * **Improve or correct the documentation** - All the documentation is in this readme file. If you see a mistake, or think something should be clarified or expanded upon, please [submit a pull request](https://github.com/wallali/connect-db2/pulls/new)
@@ -142,7 +155,7 @@ This is still a very young project and there are a number of ways you can contri
 * **Fix a bug** - Have a look at the [existing issues](https://github.com/wallali/connect-db2/issues) for the project. If there's a bug in there that you'd like to tackle, please feel free to do so. Please submit a test case with that covers your code. After you've done all that, you can [submit a pull request](https://github.com/wallali/connect-db2/pulls/new) with your changes.
 * **Request a feature** - Again, please review the [existing issues](https://github.com/wallali/connect-db2/issues) before posting a feature request. If you can't find an existing one that covers your feature idea, please [create a new one](https://github.com/wallali/connect-db2/issues). This project is maintained in my free time, chances are you will need to implement your feature idea yourself or wait till I get the chance to do it.
 
-Before you contribute code, please read through at least some of the source code for the project. I would appreciate it if any pull requests for source code changes follow the coding style of the rest of the project. Use ```npm run lint``` to lint your code before submission.
+Before you contribute code, please read through at least some of the source code for the project. I would appreciate it if any pull requests for source code changes follow the coding style of the rest of the project. Use `npm run lint` to lint your code before submission.
 
 Configure Local Dev Environment
 ---------------------------
