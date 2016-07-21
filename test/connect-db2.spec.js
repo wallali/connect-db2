@@ -6,8 +6,6 @@ var config = require('./config');
 var fixtures = require('./fixtures');
 var Db2Store = require('..')(session);
 
-
-
 describe('Db2Store constructor', function () {
     it('Throws when called as a function', function () {
         assert.throws(function () {
@@ -22,7 +20,7 @@ describe('Session interface', function () {
 
     before(function (done) {
         sessionStore.createDatabaseTable(function (err) {
-            //if (err) throw err;
+            if (err) throw err;
             done();
         });
     });
