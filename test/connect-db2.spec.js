@@ -6,11 +6,22 @@ var config = require('./config');
 var fixtures = require('./fixtures');
 var Db2Store = require('..')(session);
 
+
 describe('Db2Store constructor', function () {
-    it('Throws when called as a function', function () {
+    it('errors when called as a function', function () {
         assert.throws(function () {
             Db2Store(config);
         }, /Cannot call Db2Store constructor as a function/);
+    });
+
+    it('uses supplied connection', function () {
+        var connection = {
+            connected: true,
+            dummy: true
+        };
+        var sessionStore = new Db2Store(config, connection);
+        
+        assert.deepStrictEqual(sessionStore._client, connection);
     });
 });
 
