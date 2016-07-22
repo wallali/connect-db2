@@ -20,7 +20,7 @@ describe('Db2Store constructor', function () {
             dummy: true
         };
         var sessionStore = new Db2Store(config, connection);
-        
+
         assert.deepStrictEqual(sessionStore._client, connection);
     });
 });
@@ -56,24 +56,43 @@ describe('Session interface', function () {
     });
 
     it('sets session', function (done) {
-        sessionStore.set(session.session_id, session.data, function (err) {
+        sessionStore.set(session.session_id, session, function (err) {
             assert(!err);
             done();
         });
     });
 
     it('sets session, updates existing session', function (done) {
-        sessionStore.set(session.session_id, session.data, function (err) {
+        
+        session.cookie = { expires: '2000-1-1'};
+        
+        sessionStore.set(session.session_id, session, function (err) {
+            session.cookie = {};
+            assert(!err);
+            done();
+        });
+    });
+
+    it('wont get an expired session', function (done) {
+        sessionStore.get(session.session_id, function (err, sess) {
+            assert(!err);
+            assert(!sess, 'Session should not be returned');
+            done();
+        });
+    });
+    
+    it('touch updates session expiration', function (done) {
+        sessionStore.touch(session.session_id, session, function (err) {
             assert(!err);
             done();
         });
     });
 
     it('gets session', function (done) {
-        sessionStore.get(session.session_id, function (err, data) {
+        sessionStore.get(session.session_id, function (err, sess) {
             assert(!err);
-            assert(data, 'Data should be returned');
-            assert.deepStrictEqual(data, session.data);
+            assert(sess, 'Session should be returned');
+            assert.deepStrictEqual(sess.data, session.data);
             done();
         });
     });
@@ -82,13 +101,6 @@ describe('Session interface', function () {
         sessionStore.length(function (err, length) {
             assert(!err);
             assert.equal(length, 1);
-            done();
-        });
-    });
-
-    it('touch updates session expiration', function (done) {
-        sessionStore.touch(session.session_id, session, function (err) {
-            assert(!err);
             done();
         });
     });
@@ -105,7 +117,7 @@ describe('Session interface', function () {
     });
 
     it('clear clears all sessions', function (done) {
-        sessionStore.set(session.session_id, session.data, function (err) {
+        sessionStore.set(session.session_id, session, function (err) {
             assert(!err);
 
             sessionStore.clear(function (err) {
@@ -118,6 +130,5 @@ describe('Session interface', function () {
                 });
             });
         });
-
     });
 });
