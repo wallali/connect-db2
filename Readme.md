@@ -1,6 +1,6 @@
 connect-db2 
 ===========
-![Downloads](https://img.shields.io/npm/dm/connect-db2.svg)
+[![Downloads](https://img.shields.io/npm/dm/connect-db2.svg)](https://npmjs.org/package/connect-db2)
 
 An [IBM DB2](http://www.ibm.com/analytics/us/en/technology/db2/) session store for [express.js](http://expressjs.com/).
 
