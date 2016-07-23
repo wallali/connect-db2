@@ -23,6 +23,15 @@ describe('Db2Store constructor', function () {
 
         assert.deepStrictEqual(sessionStore._client, connection);
     });
+
+    it('errors when supplied connection is not open', function () {
+        assert.throws(function () {
+            var connection = {
+                connected: false                
+            };
+            new Db2Store({}, connection);
+        }, /db connection is not open/);
+    });
 });
 
 describe('Session interface', function () {
