@@ -6,35 +6,14 @@ var config = require('./config');
 var fixtures = require('./fixtures');
 var Db2Store = require('..')(session);
 
-
-describe('Db2Store constructor', function () {
-    it('errors when called as a function', function () {
-        assert.throws(function () {
-            Db2Store(config);
-        }, /Cannot call Db2Store constructor as a function/);
-    });
-
-    it('uses supplied connection', function () {
-        var connection = {
-            connected: true,
-            dummy: true
-        };
-        var sessionStore = new Db2Store(config, connection);
-
-        assert.deepStrictEqual(sessionStore._client, connection);
-    });
-
-    it('errors when supplied connection is not open', function () {
-        assert.throws(function () {
-            var connection = {
-                connected: false                
-            };
-            new Db2Store({}, connection);
-        }, /db connection is not open/);
-    });
-});
-
 describe('Session interface', function () {
+    
+    /**
+     * These tests are performed against a live database. 
+     * They are required to be run in sequence as each tests sets up the database for the next one.
+     * While this is not ideal, it is the quickest way to verify all operations are working as intended.
+     **/
+    
     var sessionStore = new Db2Store(config);
     var session = fixtures.sessions[0];
 
@@ -72,9 +51,11 @@ describe('Session interface', function () {
     });
 
     it('sets session, updates existing session', function (done) {
-        
-        session.cookie = { expires: '2000-1-1'};
-        
+
+        session.cookie = {
+            expires: '2000-1-1'
+        };
+
         sessionStore.set(session.session_id, session, function (err) {
             session.cookie = {};
             assert(!err);
@@ -89,7 +70,7 @@ describe('Session interface', function () {
             done();
         });
     });
-    
+
     it('touch updates session expiration', function (done) {
         sessionStore.touch(session.session_id, session, function (err) {
             assert(!err);
