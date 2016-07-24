@@ -122,7 +122,7 @@ describe('Interface tests', function () {
         });
 
         it('returns error on error', function (done) {
-            err = 'an error'
+            err = 'an error';
             store.get('123', function (e, r) {
                 assert(querySpy.calledOnce);
                 assert(e);
@@ -161,7 +161,7 @@ describe('Interface tests', function () {
         });
 
         it('returns error on error', function (done) {
-            err = 'an error'
+            err = 'an error';
             store.get('123', function (e) {
                 assert(querySpy.calledOnce);
                 assert(e);
@@ -183,7 +183,7 @@ describe('Interface tests', function () {
         });
 
         it('returns error on error', function (done) {
-            err = 'an error'
+            err = 'an error';
             store.destroy('123', function (e) {
                 assert(querySpy.calledOnce);
                 assert(e);
@@ -205,7 +205,7 @@ describe('Interface tests', function () {
         });
 
         it('returns error on error', function (done) {
-            err = 'an error'
+            err = 'an error';
             store.touch('123', {}, function (e) {
                 assert(querySpy.calledOnce);
                 assert(e);
@@ -240,7 +240,7 @@ describe('Interface tests', function () {
         });
 
         it('returns error on error', function (done) {
-            err = 'an error'
+            err = 'an error';
             store.length(function (e, r) {
                 assert(querySpy.calledOnce);
                 assert(e);
@@ -262,7 +262,7 @@ describe('Interface tests', function () {
         });
 
         it('returns error on error', function (done) {
-            err = 'an error'
+            err = 'an error';
             store.clear(function (e) {
                 assert(querySpy.calledOnce);
                 assert(e);
