@@ -6,7 +6,7 @@ var config = require('./config');
 var fixtures = require('./fixtures');
 var Db2Store = require('..')(session);
 
-describe('Session interface', function () {
+describe('Session interface live', function () {
     
     /**
      * These tests are performed against a live database. 
@@ -43,14 +43,14 @@ describe('Session interface', function () {
         });
     });
 
-    it('sets session', function (done) {
+    it('set, sets session', function (done) {
         sessionStore.set(session.session_id, session, function (err) {
             assert(!err);
             done();
         });
     });
 
-    it('sets session, updates existing session', function (done) {
+    it('set, updates existing session', function (done) {
 
         session.cookie = {
             expires: '2000-1-1'
@@ -63,7 +63,7 @@ describe('Session interface', function () {
         });
     });
 
-    it('wont get an expired session', function (done) {
+    it('get, wont get an expired session', function (done) {
         sessionStore.get(session.session_id, function (err, sess) {
             assert(!err);
             assert(!sess, 'Session should not be returned');
@@ -78,7 +78,7 @@ describe('Session interface', function () {
         });
     });
 
-    it('gets session', function (done) {
+    it('get, gets session', function (done) {
         sessionStore.get(session.session_id, function (err, sess) {
             assert(!err);
             assert(sess, 'Session should be returned');
@@ -95,7 +95,7 @@ describe('Session interface', function () {
         });
     });
 
-    it('destroy session deletes session', function (done) {
+    it('destroy deletes session', function (done) {
         sessionStore.destroy(session.session_id, function (err) {
             assert(!err);
             sessionStore.get(session.session_id, function (err, data) {
