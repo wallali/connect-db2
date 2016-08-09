@@ -5,7 +5,7 @@ connect-db2
 An [IBM DB2](http://www.ibm.com/analytics/us/en/technology/db2/) session store for [express.js](http://expressjs.com/).
 
 * The key idea behind this project is to allow using [IBM dashDB](https://console.ng.bluemix.net/catalog/services/dashdb/) for session storage for Node.js express apps deployed to [IBM Bluemix](https://console.ng.bluemix.net/).
-* Database access is provided through the [node-ibm_db](https://www.npmjs.com/package/ibm_db) package (so their [issues](https://github.com/ibmdb/node-ibm_db/issues) may affect us).
+* Database access is provided through the [node-ibm_db](https://www.npmjs.com/package/ibm_db) package (so [their issues](https://github.com/ibmdb/node-ibm_db/issues) may affect us).
 
 Setup
 -----

@@ -1,3 +1,8 @@
+0.3.0 / 2016-08-05
+==================
+
+-  Add an explicit ORGANIZE BY ROW to session table creation SQL.
+
 0.2.0 / 2016-07-22
 ==================
 
