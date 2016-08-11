@@ -17,6 +17,7 @@
   "devDependencies": {
     "eslint": "^3.1.1",
     "express-session": "^1.14.0",
+    "istanbul": "^0.4.4",
     "mocha": "^2.5.3",
     "sinon": "^1.17.4"
   },
@@ -33,6 +34,7 @@
   "scripts": {
     "pretest": "npm install",
     "test": "node_modules/.bin/mocha",
-    "lint": "node_modules/.bin/eslint index.js test lib"
+    "lint": "node_modules/.bin/eslint index.js test lib",
+    "coverage": "node_modules/.bin/istanbul cover node_modules/mocha/bin/_mocha -- -R spec"
   }
 }
