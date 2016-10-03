@@ -1,3 +1,8 @@
+0.3.2 / 2016-10-03
+==================
+
+-  Use process.nextTick to make all callbacks asynchronous.
+
 0.3.0 / 2016-08-05
 ==================
 
