@@ -37,7 +37,7 @@ app.use(session({
 }));
 ```
 
-### Using a DSN
+### Using a data source name (DSN)
 An altenative to supplying individual settings is to supply the full DSN string in the config instead:
 
 ```js
@@ -45,7 +45,7 @@ var session = require('express-session');
 var Db2Store = require('connect-db2')(session);
 
 var options = {
-    dsn: 'DATABASE=BLUDB;HOSTNAME=loclhost;PORT=50000;PROTOCOL=TCPIP;UID=db2user;PWD=password;'
+    dsn: 'DRIVER={DB2};DATABASE=BLUDB;HOSTNAME=loclhost;PORT=50000;PROTOCOL=TCPIP;UID=db2user;PWD=password;'
 };
 
 var sessionStore = new Db2Store(options);
@@ -63,7 +63,7 @@ var session = require('express-session');
 var Db2Store = require('connect-db2')(session);
 var ibmdb = require('ibm_db');
 
-var dsn = 'DATABASE=BLUDB;HOSTNAME=loclhost;PORT=50000;PROTOCOL=TCPIP;UID=db2user;PWD=password;';
+var dsn = 'DRIVER={DB2};DATABASE=BLUDB;HOSTNAME=loclhost;PORT=50000;PROTOCOL=TCPIP;UID=db2user;PWD=password;';
 var options = {};
 var conn = ibmdb.openSync(dsn);
 
@@ -105,7 +105,7 @@ var session = require('express-session');
 var Db2Store = require('connect-db2')(session);
 
 var options = {
-    ssldsn: 'DATABASE=BLUDB;HOSTNAME=loclhost;PORT=50001;PROTOCOL=TCPIP;UID=db2user;PWD=password;Security=SSL;',
+    ssldsn: 'DRIVER={DB2};DATABASE=BLUDB;HOSTNAME=loclhost;PORT=50001;PROTOCOL=TCPIP;UID=db2user;PWD=password;Security=SSL;',
     use_ssl: true
 };
 
@@ -247,7 +247,7 @@ DB_NAME="BLUDB"
 
 or a DSN via environment variables:
 ```
-DB_DSN="DATABASE=BLUDB;HOSTNAME=localhost;PORT=50000;PROTOCOL=TCPIP;UID=db2user;PWD=password;"
+DB_DSN="DRIVER={DB2};DATABASE=BLUDB;HOSTNAME=localhost;PORT=50000;PROTOCOL=TCPIP;UID=db2user;PWD=password;"
 ```
 
 ### Running Tests
