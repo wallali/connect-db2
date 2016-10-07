@@ -1,3 +1,9 @@
+0.3.3 / 2016-10-07
+==================
+
+-  Allow SSL connection when using individual settings.
+-  Allow using ssldsn from config.
+
 0.3.2 / 2016-10-03
 ==================
 

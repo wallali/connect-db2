@@ -38,7 +38,7 @@ app.use(session({
 ```
 
 ### Using a DSN
-Altenatively if you prefer, you can supply the full DSN string in the config instead:
+An altenative to supplying individual settings is to supply the full DSN string in the config instead:
 
 ```js
 var session = require('express-session');
@@ -73,6 +73,52 @@ app.use(session({
     secret: 'keyboard cat'
 }));
 ```
+
+### Enabling SSL
+
+Set `options.use_ssl` to `true` if you want to connect using SSL when using individual settings.
+
+```js
+var session = require('express-session');
+var Db2Store = require('connect-db2')(session);
+
+var options = {
+	host: 'localhost',
+	port: 50001,               // SSL port
+	username: 'db2user',
+	password: 'password',
+	database: 'BLUDB',
+    use_ssl: true
+};
+
+var sessionStore = new Db2Store(options);
+app.use(session({
+    store: sessionStore,
+    secret: 'keyboard cat'
+}));
+```
+
+When using a DSN, you can either set the `options.dsn` to an SSL connection string or set `options.use_ssl = true`, and use the `options.ssldsn` property.
+
+```js
+var session = require('express-session');
+var Db2Store = require('connect-db2')(session);
+
+var options = {
+    ssldsn: 'DATABASE=BLUDB;HOSTNAME=loclhost;PORT=50001;PROTOCOL=TCPIP;UID=db2user;PWD=password;Security=SSL;',
+    use_ssl: true
+};
+
+var sessionStore = new Db2Store(options);
+app.use(session({
+    store: sessionStore,
+    secret: 'keyboard cat'
+}));
+```
+
+So when using DSNs, `options.ssldsn` and `options.dsn` can both be set and valid and you can choose between them using the `options.use_ssl` flag. 
+This makes it convenient when working within the Bluemix environment where both properties are pre-set in the service config.
+
 
 Creating the session table
 --------------------------
@@ -130,6 +176,7 @@ var options = {
 	password: 'password',      // Password for the above database user.
 	database: 'BLUDB',         // Database name.
 	expiration: 2592000,       // The maximum age of a valid session; milliseconds.
+    use_ssl: false             // If true, use options.ssldsn or create a SSL DSN when connecting. 
 	schema: {
 		tableName: 'sessions',
 		columnNames: {
@@ -147,7 +194,7 @@ Contributing
 
 [![GitHub issues](https://img.shields.io/github/issues/wallali/connect-db2.svg)](https://github.com/wallali/connect-db2/issues)
 
-This is still a very young project and there are a number of ways you can contribute:
+There are a number of ways you can contribute:
 
 * **Improve or correct the documentation** - All the documentation is in this readme file. If you see a mistake, or think something should be clarified or expanded upon, please [submit a pull request](https://github.com/wallali/connect-db2/pulls/new)
 * **Add test cases** - There is need for more test cases and unit-tests to cover uncovered areas of code. It is a great way to get started with this project.

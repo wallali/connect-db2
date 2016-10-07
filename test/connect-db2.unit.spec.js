@@ -7,21 +7,41 @@ var sinon = require('sinon');
 var Db2Store = require('..')(session);
 
 describe('Db2Store constructor', function () {
-    var config = {
-        host: 'somehost',
-        port: 50000,
-        username: 'auser',
-        password: 'apassword',
-        database: 'ADB'
-    };
+    var config = {};
 
     before(function () {
+        config = {
+            host: 'somehost',
+            port: 50000,
+            username: 'auser',
+            password: 'apassword',
+            database: 'ADB'
+        };
+
         sinon.stub(ibmdb, 'openSync');
     });
 
     after(function () {
         ibmdb.openSync.restore();
     });
+
+    beforeEach(function () {
+        config = {
+            host: 'somehost',
+            port: 50000,
+            username: 'auser',
+            password: 'apassword',
+            database: 'ADB',
+            use_ssl: false,
+            dsn: null,
+            ssl_dsn: null
+        };
+    });
+
+    afterEach(function () {
+        ibmdb.openSync.reset();
+    });
+
 
     it('errors when called as a function', function () {
         assert.throws(function () {
@@ -36,6 +56,7 @@ describe('Db2Store constructor', function () {
         };
         var sessionStore = new Db2Store(config, connection);
 
+        assert(!ibmdb.openSync.called);
         assert.deepStrictEqual(sessionStore._client, connection);
     });
 
@@ -71,6 +92,75 @@ describe('Db2Store constructor', function () {
         assert(!store._options.allowDrop);
     });
 
+    it('uses DSN from config', function () {
+        config.dsn = 'a dsn';
+
+        var store = new Db2Store(config);
+
+        assert(store);
+        assert(ibmdb.openSync.calledOnce);
+        assert(ibmdb.openSync.calledWithExactly('a dsn'));
+    });
+
+    it('uses SSLDSN from config when using ssl', function () {
+        config.ssldsn = 'a ssl dsn';
+        config.use_ssl = true;
+
+        var store = new Db2Store(config);
+
+        assert(store);
+        assert(ibmdb.openSync.calledOnce);
+        assert(ibmdb.openSync.calledWithExactly('a ssl dsn'));
+    });
+
+    it('uses DSN from config when not using ssl', function () {
+        config.dsn = 'a dsn';
+        config.ssldsn = 'a ssl dsn';
+        config.use_ssl = false;
+
+        var store = new Db2Store(config);
+
+        assert(store);
+        assert(ibmdb.openSync.calledOnce);
+        assert(ibmdb.openSync.calledWithExactly('a dsn'));
+    });
+
+    it('uses SSLDSN from config when using ssl', function () {
+        config.dsn = 'a dsn';
+        config.ssldsn = 'a ssl dsn';
+        config.use_ssl = true;
+
+        var store = new Db2Store(config);
+
+        assert(store);
+        assert(ibmdb.openSync.calledOnce);
+        assert(ibmdb.openSync.calledWithExactly('a ssl dsn'));
+    });
+
+    it('uses params to build DSN when no DSN and not using SSL', function () {
+        config.ssldsn = 'a ssl dsn';
+        config.use_ssl = false;
+
+        var store = new Db2Store(config);
+
+        assert(store);
+        assert(ibmdb.openSync.calledOnce);
+        assert(ibmdb.openSync.calledWithExactly(
+            'DRIVER={DB2};DATABASE=ADB;UID=undefined;PWD=apassword;HOSTNAME=somehost;PORT=50000;PROTOCOL=TCPIP;'));
+    });
+
+    it('uses params to build SSLDSN when no SSLDSN and using SSL', function () {
+        config.dsn = 'a dsn';
+        config.use_ssl = true;
+
+        var store = new Db2Store(config);
+
+        assert(store);
+        assert(config.use_ssl);
+        assert(ibmdb.openSync.calledOnce);
+        assert(ibmdb.openSync.calledWithExactly(
+            'DRIVER={DB2};DATABASE=ADB;UID=undefined;PWD=apassword;HOSTNAME=somehost;PORT=50000;PROTOCOL=TCPIP;Security=SSL;'));
+    });
 });
 
 describe('Interface tests', function () {
@@ -228,7 +318,7 @@ describe('Interface tests', function () {
                 done();
             });
         });
-        
+
         it('counts sessions and returns 0 when none', function (done) {
             rows = [];
             store.length(function (e, r) {
@@ -250,7 +340,7 @@ describe('Interface tests', function () {
             });
         });
     });
-    
+
     describe('clear', function () {
         it('clears table', function (done) {
             store.clear(function (e) {
