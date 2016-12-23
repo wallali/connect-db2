@@ -7,13 +7,13 @@ var fixtures = require('./fixtures');
 var Db2Store = require('..')(session);
 
 describe('Session interface live', function () {
-    
+
     /**
      * These tests are performed against a live database. 
      * They are required to be run in sequence as each tests sets up the database for the next one.
      * While this is not ideal, it is the quickest way to verify all operations are working as intended.
      **/
-    
+
     var sessionStore = new Db2Store(config);
     var session = fixtures.sessions[0];
 
@@ -103,6 +103,13 @@ describe('Session interface live', function () {
                 assert(!data);
                 done();
             });
+        });
+    });
+
+    it('clearExpired does not error', function (done) {
+        sessionStore.clearExpired(function (err) {
+            assert(!err);
+            done();
         });
     });
 

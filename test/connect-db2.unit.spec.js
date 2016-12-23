@@ -361,4 +361,26 @@ describe('Interface tests', function () {
             });
         });
     });
+
+    describe('clearExpired', function () {
+        it('clears expired entries from table', function (done) {
+            store.clearExpired(function (e) {
+                assert(querySpy.calledOnce);
+                assert(!e);
+                assert(connection.query.args[0][0].match(/DELETE/i));
+                assert(connection.query.args[0][0].match(/WHERE\s+"expires"/i));
+                done();
+            });
+        });
+
+        it('returns error on error', function (done) {
+            err = 'an error';
+            store.clearExpired(function (e) {
+                assert(querySpy.calledOnce);
+                assert(e);
+                assert.strictEqual(e, err);
+                done();
+            });
+        });
+    });
 });
