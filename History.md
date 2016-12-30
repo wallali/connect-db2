@@ -1,4 +1,9 @@
-0.3.3 / 2016-10-07
+0.5.0 / 2016-12-30
+==================
+
+- Add operation clearExpired to allow clearing expired session from the session table.
+
+0.4.0 / 2016-10-07
 ==================
 
 -  Allow SSL connection when using individual settings.
