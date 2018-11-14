@@ -45,7 +45,7 @@ var session = require('express-session');
 var Db2Store = require('connect-db2')(session);
 
 var options = {
-    dsn: 'DRIVER={DB2};DATABASE=BLUDB;HOSTNAME=loclhost;PORT=50000;PROTOCOL=TCPIP;UID=db2user;PWD=password;'
+    dsn: 'DRIVER={DB2};DATABASE=BLUDB;HOSTNAME=localhost;PORT=50000;PROTOCOL=TCPIP;UID=db2user;PWD=password;'
 };
 
 var sessionStore = new Db2Store(options);
