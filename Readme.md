@@ -25,7 +25,7 @@ var Db2Store = require('connect-db2')(session);
 var options = {
 	host: 'localhost',
 	port: 50000,
-	username: 'db2user',
+	user: 'db2user',
 	password: 'password',
 	database: 'BLUDB'
 };
@@ -85,7 +85,7 @@ var Db2Store = require('connect-db2')(session);
 var options = {
 	host: 'localhost',
 	port: 50001,               // SSL port
-	username: 'db2user',
+	user: 'db2user',
 	password: 'password',
 	database: 'BLUDB',
     use_ssl: true
@@ -172,11 +172,11 @@ Here is a list of all available options together with their default values:
 var options = {
 	host: 'localhost',         // Host name for database connection.
 	port: 50000,               // Port number for database connection.
-	username: 'db2user',       // Database user.
+	user: 'db2user',       	   // Database user.
 	password: 'password',      // Password for the above database user.
 	database: 'BLUDB',         // Database name.
 	expiration: 2592000,       // The maximum age of a valid session; milliseconds.
-    use_ssl: false             // If true, use options.ssldsn or create a SSL DSN when connecting. 
+	use_ssl: false             // If true, use options.ssldsn or create a SSL DSN when connecting. 
 	schema: {
 		tableName: 'sessions',
 		columnNames: {
@@ -228,7 +228,7 @@ Now, you'll need to set up a local test database or [create a free dashDB instan
 {
 	host: 'localhost',
 	port: 50000,
-	username: 'db2user',
+	user: 'db2user',
 	password: 'password',
 	database: 'BLUDB',
     dsn: ''
