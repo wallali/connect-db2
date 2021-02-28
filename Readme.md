@@ -172,11 +172,11 @@ Here is a list of all available options together with their default values:
 var options = {
 	host: 'localhost',         // Host name for database connection.
 	port: 50000,               // Port number for database connection.
-	user: 'db2user',       // Database user.
+	user: 'db2user',       	   // Database user.
 	password: 'password',      // Password for the above database user.
 	database: 'BLUDB',         // Database name.
 	expiration: 2592000,       // The maximum age of a valid session; milliseconds.
-    use_ssl: false             // If true, use options.ssldsn or create a SSL DSN when connecting. 
+	use_ssl: false             // If true, use options.ssldsn or create a SSL DSN when connecting. 
 	schema: {
 		tableName: 'sessions',
 		columnNames: {
